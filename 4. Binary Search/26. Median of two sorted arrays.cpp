@@ -100,7 +100,7 @@ public:
         // if(n1>n2)	return findMedianSortedArrays(b,a);
 
         int no_of_elem_before = (n1+n2)/2;
-        int lo=0, hi = min(n1, no_of_elem_before);
+        int lo=max(0, no_of_elem_before-n2), hi = min(n1, no_of_elem_before);
 
 
         while(lo<=hi){
@@ -109,11 +109,11 @@ public:
 
             int l1 = mid>0  ? a[mid-1] : INT_MIN;
             int r1 = mid<n1 ? a[mid] : INT_MAX;
-            int l2 = rem > 0 and rem <= n2 ? b[rem - 1] : INT_MIN; 
+            int l2 = rem > 0 ? b[rem - 1] : INT_MIN; 
             int r2 = rem < n2 ? b[rem] : INT_MAX; 
             
             if(l1 > r2 )		hi = mid-1;
-            else if(l2 > r1 or rem > n2)	lo = mid+1;
+            else if(l2 > r1)	lo = mid+1;
             else{
                 if((n1+n2)%2 == 0){
                     return (max(l1,l2)+min(r1,r2))/2.0;
