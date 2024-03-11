@@ -21,7 +21,8 @@ string rec(int r, int c, int** arr){
     return path;
 }
 
-
+//TC - O(m*n) + O(m*n*4)
+//SC - O(2*m*n)
 int distinctIslands(int** arr, int n, int m){
     map<string, bool> mp;
     rows = n;
