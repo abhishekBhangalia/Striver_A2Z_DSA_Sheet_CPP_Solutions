@@ -67,3 +67,38 @@ class Solution {
         return ans;
     }
 };
+
+class Solution2 {
+  public:
+    vector<int> shortestPath(vector<vector<int>>& edges, int N,int M, int src){
+        vector<vector<int>> graph(N, vector<int>());
+        for(auto &edge:edges) {
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+        }
+        
+        queue<int> q;
+        q.push(src);
+        vector<int> dist(N, INT_MAX);
+        dist[src] = 0;
+        
+        while(not q.empty()) {
+            int v = q.front();
+            q.pop();
+            
+            for(auto &nb:graph[v]){
+                if(dist[nb] > dist[v] + 1){
+                    dist[nb] = dist[v] + 1;
+                    q.push(nb);
+                }
+            }
+        }
+        for(int i=0; i<N; i++){
+            if (dist[i] == INT_MAX){
+                dist[i] = -1;
+            }
+        }
+        return dist;
+    }
+};
+
