@@ -35,4 +35,35 @@ class Solution {
         }
         return dist;
     }
+
+    vector<int> shortestPath2(vector<vector<int>>& edges, int N,int M, int src){
+        vector<vector<int>> graph(N, vector<int>());
+        for(auto &edge:edges) {
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+        }
+        
+        queue<pair<int,int>> q;
+        q.push({src,0});
+        vector<int> ans(N, INT_MAX);
+        ans[src] = 0;
+        
+        while(not q.empty()) {
+            pair<int,int> v = q.front();
+            q.pop();
+            
+            for(auto &nb:graph[v.first]){
+                if(ans[nb] > v.second + 1){
+                    ans[nb] = v.second+1;
+                    q.push({nb,ans[nb]});
+                }
+            }
+        }
+        for(int i=0; i<N; i++){
+            if (ans[i] == INT_MAX){
+                ans[i] = -1;
+            }
+        }
+        return ans;
+    }
 };
