@@ -3,7 +3,7 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    //TC - O(E log(h)), h height of min heap
+    //TC - O(E log(v)), h height of min heap
     vector<int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         // Code here
