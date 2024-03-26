@@ -5,6 +5,8 @@ auto fast = []{
     return false;
 }();
 
+// pq is not needed here 
+// if using pq we should sort the items by stops and not by cost otherwise it will give wrong solution
 // class Solution {
 // public:
 //     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
