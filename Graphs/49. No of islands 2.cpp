@@ -31,7 +31,7 @@ struct DSU
 };
 
 
-vector<int> numberOfIslandII(int n, int m, vector<vector<int>>& queries, int q)
+vector<int> numOfIslands(int n, int m, vector<vector<int>>& queries)
 {
     DSU ds(n*m);
     int islands = 0;
@@ -44,6 +44,10 @@ vector<int> numberOfIslandII(int n, int m, vector<vector<int>>& queries, int q)
     }
 
     for(auto &q : queries){
+        if(grid[q[0]][q[1]] == 1){ //in case of duplicate query, no need to do further steps.
+            ans.emplace_back(islands);
+            continue;
+        }
         islands++;
         grid[q[0]][q[1]] = 1;
         int curNode = q[0]*m + q[1];
