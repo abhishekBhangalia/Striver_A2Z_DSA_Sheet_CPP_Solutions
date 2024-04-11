@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+void dfs(int v, vector<vector<int>>& graph, vector<int>& vis, stack<int>& ft){
+	for(auto &nb:graph[v]){
+		if(not vis[nb]){
+			vis[nb] = 1;
+			dfs(nb, graph, vis, ft);
+		}
+	}
+	ft.push(v);
+}
+
+void dfs2(int v, vector<vector<int>>& graph, vector<int>& vis){
+	for(auto &nb:graph[v]){
+		if(not vis[nb]){
+			vis[nb] = 1;
+			dfs2(nb, graph, vis);
+		}
+	}
+}
+
+int stronglyConnectedComponents(int v, vector<vector<int>> &edges)
+{
+	vector<vector<int>> graph(v), revGraph(v);
+
+	for(auto &e : edges){
+		// cout<<e.size();
+		graph[e[0]].push_back(e[1]);
+		revGraph[e[1]].push_back(e[0]);
+	}
+	vector<int> vis(v);
+	stack<int> ft; //finish time stack
+	for(int i=0; i<v; i++){
+		if(not vis[i]) {
+			vis[i] = 1;
+			dfs(i,graph,vis,ft);
+		}
+	}
+	fill(vis.begin(), vis.end(),0);
+
+	int components = 0;
+	while(not ft.empty()){
+		int v = ft.top();
+		ft.pop();
+		if(not vis[v]){
+			components++;
+			vis[v] = 1;
+			dfs2(v, revGraph,vis);
+		}		
+	}
+	return components;
+}
