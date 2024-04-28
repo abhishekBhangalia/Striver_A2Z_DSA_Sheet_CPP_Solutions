@@ -1,0 +1,18 @@
+int kDistinctChars(int k, string &str)
+{
+    int freq[26] = {0}; 
+    int uniques = 0, l = 0, r = 0, n = str.size();
+    while(r < n){
+        freq[str[r] - 'a']++;
+        if(freq[str[r] - 'a'] == 1){
+            uniques++;
+        }
+        if(uniques > k){
+            uniques -= --freq[str[l++] - 'a'] == 0;
+        }
+        r++;
+    }
+    return r-l;
+}
+
+
